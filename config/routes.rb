@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
-  root 'home#show'
+  # devise_for :users
+  devise_for :users, :controllers => {
+    :sessions      => "users/sessions",
+    :registrations => "users/registrations",
+    :passwords     => "users/passwords",
+    :omniauth_callbacks => "users/omniauth_callbacks" 
+  }
+  get 'home/index'
+  root 'home#index'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  get 'auth/:provider/callback', to: 'sessions#create'
-  get '/logout', to: 'sessions#destroy'
-
 end

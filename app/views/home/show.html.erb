@@ -1,6 +1,0 @@
-<% if logged_in? %>
-  <img src=<%= current_user.image_url %> alt="">
-  <%= link_to "ログアウト", logout_path %>
-<% else %>
-  <%= link_to "Twitterでログイン", 'auth/twitter' %>
-<% end %>
