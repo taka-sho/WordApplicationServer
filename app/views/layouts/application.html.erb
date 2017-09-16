@@ -30,9 +30,12 @@
             <li><a href="/training_mode">トレーニング</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            <% if current_user && current_user.administrator? %>
+              <li><%= link_to "Admin", rails_admin_path %></li>
+            <% end %>
             <% if user_signed_in? %>
-              <img src=<%= current_user.image_url %> alt="">
-              <li><%= link_to "ログアウト", logout_path %></li>
+              <img src=<%#= current_user.image_url %> alt="">
+              <li><%= link_to "ログアウト", destroy_user_session_path %></li>
             <% else %>
               <li><%= link_to "TwitterLogin", user_twitter_omniauth_authorize_path %></li>
             <% end %>

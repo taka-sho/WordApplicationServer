@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20170915103355) do
     t.string "provider"
     t.string "uid"
     t.string "name"
-    t.integer "administrator", default: 0, null: false
+    t.integer "authority", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
