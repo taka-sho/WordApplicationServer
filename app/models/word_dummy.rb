@@ -1,0 +1,2 @@
+class WordDummy < ApplicationRecord
+end

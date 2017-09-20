@@ -25,8 +25,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
+            <li><a href="/learn_mode">覚えるパート</a></li>
             <li><a href="/challenge_mode ">チャレンジパート</a></li>
-            <li><a href="/skill_check_mode">スキルチェック</a></li>
             <li><a href="/training_mode">トレーニング</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -35,7 +35,7 @@
             <% end %>
             <% if user_signed_in? %>
               <img src=<%#= current_user.image_url %> alt="">
-              <li><%= link_to "ログアウト", destroy_user_session_path %></li>
+              <li><%= link_to "ログアウト", destroy_user_session_path, :method => :delete, :confirm => 'Are you sure?' %></li>
             <% else %>
               <li><%= link_to "TwitterLogin", user_twitter_omniauth_authorize_path %></li>
             <% end %>
@@ -44,10 +44,7 @@
       </div><!-- /.container-fluid -->
     </nav>
     <main>
-    <div class="alert alert-danger alert-dismissible" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <%= alert %>
-    </div>
+    <%= alert %>
     <%= yield %>
     </main>
   </body>

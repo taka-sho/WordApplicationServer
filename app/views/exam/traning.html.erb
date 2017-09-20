@@ -1,0 +1,23 @@
+<h2>トレーニングパート</h2>
+
+<p>
+終わりがなく無限に問題を解くことのデキるモードです<br>
+単語を思えるトレーニングに最適なモードです
+</p>
+
+<button class="btn">スタート</button>
+
+<div id="exam">
+  <h3 class="exam_title"></h3>
+  <ul class="choice"> </ul>
+</div>
+
+<script>
+console.log("DONE")
+$('.btn').on('click',function(){
+  // $.get(window.location.origin + "/get-exam", function(data, status){
+  $.get("http://localhost:2403/get-exam", function(data, status){
+    data[0]
+  });
+});
+</script>
