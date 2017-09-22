@@ -1,5 +1,5 @@
 class ExamController < ApplicationController
-  def traning
+  def training
     render "exam/traning"
   end
   def challenge

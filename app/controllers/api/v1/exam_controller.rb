@@ -1,11 +1,6 @@
 class Api::V1::ExamController < ApplicationController
   def learned #覚えるパート
-    # word = Word.all.sample
-    # @data = {
-    #   question: word.,
-    #   answer: ,
-    #   dummy: []
-    # }
+    @data = { englishes: Word.all.sample(5).map(&:english) }
     render json: @data
   end
 
@@ -13,8 +8,17 @@ class Api::V1::ExamController < ApplicationController
     render json: hoge(current_user.words.sample)
   end
 
-  def traning トレーニング
+  def training #トレーニング
     render json: hoge(Word.all.sample)
+  end
+
+  def remembered
+    data = WordThatTheUserLearned.new(
+      user_id: params["user_id"].to_i,
+      word_id: params["word_id"].to_i
+    )
+    render json: (data.save ? {status: 201} : {status: 500})
+    # render status: :201
   end
 
   private
@@ -25,24 +29,20 @@ class Api::V1::ExamController < ApplicationController
         @data = {
           question: choice_word.japanese,
           answer: choice_word.english,
-          dummies: choice_word.word_dummies.map(&:english).sample(3)
+          dummies: choice_word.dummy_of_from_word.map(&:english).sample(3)
         }
       elsif params[:data_format] == "english"
         @data = {
           question: choice_word.english,
           answer: choice_word.japanese,
-          dummies: choice_word.word_dummies.map(&:english).sample(3)
+          dummies: choice_word.dummy_of_from_word.map(&:japanese).sample(3)
         }
       else
-        @data = {error: "形式不明"}
+        @data = {status: "400"} #Other than English or Japanese
       end
     else
       @data = {error: "学習単語なし"}
     end
     return @data
   end
-
-  def remembered
-  end
-
 end
