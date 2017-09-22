@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   }
   get 'home/index'
   # get '/all_book_marks', to: 'book_marks#all_book_marks',as: :all_book_marks
-  get '/training_mode', to: 'exam#traning'
+  get '/training_mode', to: 'exam#training'
   get '/challenge_mode', to: 'exam#challenge'
   get '/learn_mode', to: 'exam#learn'
 
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       namespace :exam do
         get "/learned" , :action => "learned"
         get "/challenge/:data_format", :action => "challenge"
-        get "/traning/:data_format", :action => "traning"
+        get "/training/:data_format", :action => "training"
         post "/remembered", :action => "remembered"
       end
     end
