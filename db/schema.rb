@@ -10,24 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170920081108) do
+ActiveRecord::Schema.define(version: 20170922093948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "english_word_for_dummies", force: :cascade do |t|
-    t.integer "word_id"
-    t.string "dummy_word"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "japanese_word_for_dummies", force: :cascade do |t|
-    t.string "word_id"
-    t.string "dummy_word"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -59,8 +45,15 @@ ActiveRecord::Schema.define(version: 20170920081108) do
   end
 
   create_table "word_dummies", force: :cascade do |t|
-    t.integer "word_id", null: false
-    t.string "dummy_word"
+    t.integer "to_word_id"
+    t.integer "from_word_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "word_relationships", force: :cascade do |t|
+    t.integer "from_word_id"
+    t.integer "to_word_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -73,7 +66,7 @@ ActiveRecord::Schema.define(version: 20170920081108) do
   end
 
   create_table "words", force: :cascade do |t|
-    t.string "japanaze"
+    t.string "japanese"
     t.string "english"
     t.string "parts_of_speech"
     t.datetime "created_at", null: false

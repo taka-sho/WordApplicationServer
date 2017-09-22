@@ -16,8 +16,9 @@ Rails.application.routes.draw do
   namespace :api, {format: 'json'} do
     namespace :v1 do
       namespace :exam do
-        get "/" , :action => "index"
-        get "/learned/:data_format", :action => "learned"
+        get "/learned" , :action => "learned"
+        get "/challenge/:data_format", :action => "challenge"
+        get "/traning/:data_format", :action => "traning"
         post "/remembered", :action => "remembered"
       end
     end

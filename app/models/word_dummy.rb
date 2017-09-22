@@ -1,2 +1,0 @@
-class WordDummy < ApplicationRecord
-end
