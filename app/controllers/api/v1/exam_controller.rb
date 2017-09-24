@@ -17,29 +17,24 @@ class Api::V1::ExamController < ApplicationController
       user_id: params["user_id"].to_i,
       word_id: params["word_id"].to_i
     )
+    p data
     render json: (data.save ? {status: 201} : {status: 500})
-    # render status: :201
   end
 
   private
 
   def hoge(choice_word)
     if choice_word
-      if params[:data_format] == "japanese"
-        @data = {
-          question: choice_word.japanese,
-          answer: choice_word.english,
-          dummies: choice_word.dummy_of_from_word.map(&:english).sample(3)
-        }
-      elsif params[:data_format] == "english"
-        @data = {
-          question: choice_word.english,
-          answer: choice_word.japanese,
-          dummies: choice_word.dummy_of_from_word.map(&:japanese).sample(3)
-        }
-      else
-        @data = {status: "400"} #Other than English or Japanese
-      end
+      dummies = [{ japanese: choice_word.japanese, english: choice_word.english }]
+      choice_word.dummy_of_from_word.each { |word| 
+        dummies << { japanese: word.japanese, english: word.english }
+      }
+      @data = {
+        id: choice_word.id,
+        japanese: choice_word.japanese,
+        english: choice_word.english,
+        dummies: dummies.shuffle
+      }
     else
       @data = {error: "学習単語なし"}
     end

@@ -5,19 +5,72 @@
 単語を思えるトレーニングに最適なモードです
 </p>
 
-<button class="btn">スタート</button>
+<select id="select-lang" name="lang" class="btn">
+  <option value="english">日本語</option>
+  <option value="japanese">英語</option>
+</select>
 
-<div id="exam">
-  <h3 class="exam_title"></h3>
-  <ul class="choice"> </ul>
+<button id="start" class="btn">スタート</button>
+
+<div class="exam">
+  <span class="judge"></span>
+  <h3 class="exam_title"></h3><br>
+  <form action="" id="exam_choice"></form>
+  <button id="reply" class="btn">答える</button>
 </div>
 
 <script>
-console.log("DONE")
-$('.btn').on('click',function(){
-  // $.get(window.location.origin + "/get-exam", function(data, status){
-  $.get("http://localhost:2403/get-exam", function(data, status){
-    data[0]
+//問題を取得して、表示する関数
+var reply = {};
+function getExam(){
+  var url = window.location.origin + "/api/v1/exam/training";
+  // var selectedLang = 
+  switch( $('#select-lang').val() ) {
+    case "japanese" :  reply.questionLang = "japanese"; reply.answerLang = "english"; break;
+    case "english" : reply. questionLang = "english"; reply. answerLang = "japanese"; break;
+  }
+  $.get(url, function(data, status){
+    reply.data = data;
+    console.log(data);
+    //question
+    $('.exam_title').text(data[questionLang]);
+    //dummy
+    $.each(data.dummies, function( i, v ){
+      var data = '<input type="radio" name="choice" value="' + v[reply.answerLang] + '">' + v[reply.answerLang];
+      $('#exam_choice').append(data);
+    });
   });
-  });
+};
+
+// スタートボタンを押したときの処理
+$('#start').on('click',function(){
+  getExam()
+});
+
+//答えるボタンを押したとき処理
+$('#reply').on('click', function(){
+  if ($('input[name=choice]:checked').val() === reply.answerLang) {
+    //正解時の処理
+    $('.judge').text("OK");
+    var url = window.location.origin + "/api/v1/exam/remembered";
+    var json = { user_id: 1 <%#= current_user.id %>, word_id: reply.data.id } ;
+    $.post(url , json, function(data){
+      console.log("正解データを無事保存しました")
+    });
+  } else if ($('input[name="choice"]:checked').val() === undefined ) {
+    alert("回答が未選択です");
+    return false
+  } else {
+    //不正解時の処理
+    $('.judge').text("NO");
+  };
+
+  //指定時間後に次の問題を取得させる処理
+  $('#exam_choice').empty();
+  setTimeout(function(){
+    $('.judge').text("");
+    getExam()
+  },3000);
+});
+
 </script>

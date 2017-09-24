@@ -17,6 +17,7 @@ Word.new(japanese: "お金", english: "money").save
 Word.new(japanese: "りんご", english: "Apple").save
 Word.new(japanese: "バナナ", english: "banana").save
 Word.new(japanese: "もも", english: "peach").save
+Word.new(japanese: "殴る", english: "panch").save
 Word.new(japanese: "ビジネス", english: "business").save
 Word.new(japanese: "会社", english: "company").save
 Word.new(japanese: "事務所", english: "office").save
@@ -24,7 +25,7 @@ Word.new(japanese: "欲しい", english: "want").save
 Word.new(japanese: "店", english: "store").save
 Word.new(japanese: "方法", english: "way").save
 Word.new(japanese: "注文", english: "order").save
-Word.new(japanese: "call", english: "呼ぶ").save
+Word.new(japanese: "呼ぶ", english: "call").save
 Word.new(japanese: "サービス", english: "service").save
 Word.new(japanese: "サーバー", english: "server").save
 Word.new(japanese: "基本", english: "base").save

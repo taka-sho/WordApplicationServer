@@ -44,13 +44,6 @@ ActiveRecord::Schema.define(version: 20170922093948) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  create_table "word_dummies", force: :cascade do |t|
-    t.integer "to_word_id"
-    t.integer "from_word_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "word_relationships", force: :cascade do |t|
     t.integer "from_word_id"
     t.integer "to_word_id"
@@ -61,6 +54,8 @@ ActiveRecord::Schema.define(version: 20170922093948) do
   create_table "word_that_the_user_learneds", force: :cascade do |t|
     t.integer "user_id"
     t.integer "word_id"
+    t.integer "challenge_count"
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -68,7 +63,6 @@ ActiveRecord::Schema.define(version: 20170922093948) do
   create_table "words", force: :cascade do |t|
     t.string "japanese"
     t.string "english"
-    t.string "parts_of_speech"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

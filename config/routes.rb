@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       namespace :exam do
         get "/learned" , :action => "learned"
         get "/challenge/:data_format", :action => "challenge"
-        get "/training/:data_format", :action => "training"
+        get "/training", :action => "training"
         post "/remembered", :action => "remembered"
       end
     end
