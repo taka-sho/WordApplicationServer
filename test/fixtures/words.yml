@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  japanaze: MyString
+  english: MyString
+  parts_of_speech: MyString
+
+two:
+  japanaze: MyString
+  english: MyString
+  parts_of_speech: MyString

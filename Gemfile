@@ -33,12 +33,26 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'jquery-rails'
+gem 'bootstrap-sass'
+gem 'cancancan'
+gem 'rails_admin'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'pry-rails'  # rails console(もしくは、rails c)でirbの代わりにpryを使われる
+  gem 'pry-doc'    # methodを表示
+  gem 'pry-byebug' # デバッグを実施(Ruby 2.0以降で動作する)
+  gem 'pry-stack_explorer' # スタックをたどれる
+  gem 'awesome_print'
 end
 
 group :development do
